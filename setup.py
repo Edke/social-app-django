@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 """Setup file for easy installation"""
 import re
+from setuptools import setup, find_packages
+
 
 from os.path import join, dirname
 from setuptools import setup
@@ -20,8 +22,10 @@ def long_description():
     return open(join(dirname(__file__), 'README.md')).read()
 
 
-def load_requirements():
-    return open(join(dirname(__file__), 'requirements.txt')).readlines()
+# def load_requirements():
+#     return open(join(dirname(__file__), 'requirements.txt')).readlines()
+#
+
 
 setup(
     name='social-auth-app-django',
@@ -32,12 +36,18 @@ setup(
     license='BSD',
     keywords='django, social auth',
     url='https://github.com/python-social-auth/social-app-django',
-    packages=[
-        'social_django',
-        'social_django.migrations'
-    ],
+    packages=find_packages(),
+    include_package_data=True,
+    # packages=[
+    #     'social_django',
+    #     'social_django.migrations'
+    # ],
     long_description=long_description(),
-    install_requires=load_requirements(),
+    # install_requires=load_requirements(),
+    install_requires=[
+        'six',
+        'social-auth-core >= 1.2.0'
+    ],
     classifiers=[
         'Development Status :: 4 - Beta',
         'Topic :: Internet',
